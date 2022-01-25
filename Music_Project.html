@@ -1,0 +1,2321 @@
+
+<!--DOCTYPE html tells the browser that the document is an html page-->
+<!DOCTYPE html>
+<!--Begining of html code-->
+<html>
+<!--Begining of head section--> 
+<head>
+<style>
+/*Basic color variables*/
+:root{
+	--bg_color_1 : #070130;
+	--bg_color_2: #0d0065;
+	--bg_color_3: #222b5c;
+	--bg_music_bar: #2b2b2a;
+	--font_color_1: white;
+	--font_color_2: lightgrey;
+	--font_color_3 : #1DB954;
+}
+/*End of variables section*/
+
+/*Basic sections of the html page*/
+body{
+	height: 100%;
+	width: 100%;
+	margin-left: -5px;
+	margin-top: -1vh;
+	background: rgb(14,212,197);
+background: linear-gradient(165deg, rgba(14,212,197,1) 27%, rgba(6,17,112,1) 57%, rgba(237,14,157,1) 81%);
+}
+
+nav{
+	height: 4rem;
+	width:100%;
+	margin: 0.3rem;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	position: fixed;
+	z-index: 1; /*Navigation bar should be always at top z-index ensures that*/
+	background: rgb(14,212,197);
+background: linear-gradient(165deg, rgba(14,212,197,1) 27%, rgba(6,17,112,1) 57%, rgba(237,14,157,1) 81%);
+}
+
+main{
+	height: 150%;
+	width:65%;
+	margin-top: 10vh;
+	margin-left: 4%;
+	margin-right: 3%;
+	padding-bottom: 20vh;
+	display: inline-flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	flex-direction: column;
+}
+.favs {
+	animation-name: flexible;
+	animation-timing-function: ease-in-out;
+	animation-duration: 2s;
+	perspective: 10000px;
+	transform-style: preserve-3d;
+	animation-iteration-count: infinite;
+    color:white;
+    font-size: 20px;
+}
+
+aside{
+	height:auto;
+	width:28%;
+	display: inline-flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	padding: 0px;
+	margin-top: 8%;
+	margin-left: -1vw;
+	vertical-align: top; /*Ensures that aside is displayed right beside main at the top*/
+}
+/*End of basic sections*/
+
+/* Basic Classes*/
+.hide{
+	display: none; /*This class hides any div that it is applie to*/
+}
+/*End of classes*/
+
+/*Navigation Bar*/
+/*Music Player Logo and Name part*/
+#music-player-tag{
+	width: auto;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+}
+#search-bar-utility{
+	width: auto;
+	display: flex;
+	margin-right: 2rem;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+#music-player-logo{
+	display: inline;
+    animation-name: rotating;
+	animation-timing-function: ease-in-out;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+@keyframes rotating {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+#music-player-logo img{
+	height: 3.3rem;
+	width: 3.3rem;
+	border-radius: 50%;
+	display: inline;
+}
+#music-player-name{
+	color: white;
+	font-family: helvetica, sans-serif;
+	padding: 5px;
+	margin-top: 7px;
+	display: inline;
+}
+/*End of Music Player Logo and name part*/
+/*Search bar*/
+#search-bar{
+	width: auto;
+	margin-top: 14px;
+	margin-right: 2rem;
+	color: white;
+	font-size: 1.1rem;
+}
+
+#search-bar input[type="text"]{
+	height:1.7rem;
+	width:17vw;
+	margin-right: 3px;
+	padding: 1px;
+	background-color: #0c0252;
+	border:none;
+	color:var(--font_color_1);
+	font-family: helvetica, sans-serif;
+}
+::placeholder{
+	color: var(--font_color_1);  /*Editing the placeholder of the searchbar*/
+	font-family: helvetica, sans-serif;
+	padding: 5px;
+}
+#search-bar input:focus{
+	height:1.7rem;
+	width:17vw;
+	outline:none;
+}
+#search-bar i{
+	margin-top: 1px;
+}
+/*End of search bar*/
+/*Miscellaneous part of navigation bar*/
+#notifications img{
+    width: 40px;
+	height: 30px;
+	font-size: 1.3rem;
+	color: var(--font_color_1);
+	margin-top: 18px;
+	margin-right: 2rem;
+    animation-name: ringing_bell;
+	animation-duration: 0.4s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-delay: 10s;
+	position: first;
+
+}
+@keyframes ringing_bell {
+	0% {
+		transform: rotate(-15deg);
+	}
+	50% {
+		transform: rotate(15deg);
+	}
+	100% {
+		transform: rotate(-15deg);
+	}
+}
+#user{
+	margin-top: 5px;
+}
+#user img{
+	height: 3.3rem;
+	width: 3.3rem;
+	border-radius: 50%;
+}
+/*End of Miscellaneous portion of navigation bar*/
+/*End of Navigation Bar*/
+
+/*Main*/
+#main-header h1{
+	color: var(--font_color_1);
+	font-family: helvetica, sans-serif;
+}
+/* Home Screen Carousel*/
+#new-releases{
+	overflow: hidden;
+	white-space: nowrap;
+    justify-content: space-around;
+}
+#new-releases img{
+	height:35vh;
+	width:37vh;
+	text-align: center;
+	margin-top: 50px;
+	padding: 4%;
+	transition: all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s;
+    box-shadow: 0px 0px 12px 0.1px rgb(189, 23, 139);
+    position: relative;
+    border-radius: 35%;
+}
+#new-releases img:hover{
+	transform: scale(1.1);
+	transition: transform 0.4s ease-in-out; /*Animation on hover*/
+}
+
+/*End of home screen carousel*/
+/*Begining of latest release section*/
+#latest-release-items{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	position: relative;
+	margin-right: 5vw;
+}
+#latest-release h1{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_1);
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin-left: -5px;
+	margin-top: 6vh;
+	margin-bottom: -14px;
+}
+#latest-release-item{
+	height:auto;
+	width:250px;
+	color: var(--font_color_1);
+	font-family: helvetica, sans-serif;
+	display: flex;
+	flex-direction:row;
+	justify-content: space-around;
+	padding-top: 2rem;
+}
+#latest-item-title{
+	padding-left: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 0vw;
+}
+#latest-release-img{
+	height: 100px;
+	width: 100px;
+	padding: 0px;
+	background-image: url(https://businessconnectindia.in/wp-content/uploads/2021/05/jubin-nautiyal-290x300.jpg);
+	background-position: center;
+	background-size: cover;
+	color: var(--font_color_1);
+	text-align: center;
+	font-size: 1.3rem;
+}
+#latest-release-img-button{
+	margin-top: 40%;
+}
+#latest-release-img-button a{
+	color: var(--font_color_1);
+}
+#latest-release-img:hover{
+	opacity: 0.8;
+}
+#latest-release-img:hover>.hide{
+	display: block;   /*Play button is displayed on hover*/
+}
+/*Dropdown bar of latest release section*/
+#dropdown{
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	margin-left: 23vw;
+}
+#dropdown-menu{
+	height:0px;
+	width: 0px;
+	margin: 0px;
+	padding: 0px;
+	background-color: var(--font_color_1);
+	font-family: sans-serif;
+	color: #4b5c5e;
+    font-weight: 400;
+	position: relative;
+	z-index: 1;
+	padding: 1rem;
+	display: none;
+}
+#dropdown-list{
+    display: none;
+	margin-bottom: 1rem;
+}
+#dropdown-list a{
+	text-decoration: none;
+	color : #4b5c5e;
+}
+#dropdown:hover #dropdown-menu{
+	height:150px;
+    width: 200px;
+	display: block;
+}
+#dropdown:hover #dropdown-list{
+	display: block;
+}
+/*End of Dropdown bar of latest release section*/
+/*End of latest release section*/
+/*Begining of popular artist section*/
+#popular-artists h1{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_1);
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin-top: 6vh;
+	margin-left: -5px;
+	margin-bottom: -14px;
+}
+#popular-artist-list{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+#popular-artists-image{
+	background-image: url(https://www.toplisthub.com/wp-content/uploads/2014/03/Shreya-Ghoshal.jpg);
+	background-size: cover;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 2rem;
+}
+#popular-artists-image-2{
+	background-image: url(https://www.jagranimages.com/images/newimg/20052021/20_05_2021-arijit_singh_21660518.jpg);
+	background-size: cover;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 2rem;
+}
+#popular-artists-image-3{
+	background-image: url(https://www.sukhbeerbrar.com/en/wp-content/uploads/2021/04/Armaan-Malik.jpg);
+	background-size: cover;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 2rem;
+}
+#popular-artists-image-4{
+	background-image: url(https://imgk.timesnownews.com/media/15906943c06218cb9d67d1855bc6cc5e.jpg);
+	background-size: cover;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 2rem;
+}
+#popular-artists-image-5{
+	background-image: url(https://www.partymap.in/palakmuchhal/palakmuchhal.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 2rem;
+}
+#popular-artists-image-6{
+	background-image: url(https://c8d8q6i8.stackpathcdn.com/wp-content/uploads/2021/07/Jubin-Nautiyal.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 2rem;
+}
+#popular-artists-text{
+	text-align: center;
+	margin-top: 40%;
+	color: var(--font_color_1);
+	font-family: sans-serif;
+	font-weight: bold;
+}
+#popular-artists-text a{
+	text-decoration: none;
+	color: var(--font_color_1);
+}
+#popular-artists-image:hover{
+	box-shadow: 0px 0px 9px 5px rgba(230,196,196,0.2); /*On hovering a shadow appears*/
+	opacity: 0.8;
+}
+#popular-artists-image:hover>.hide{
+	display: block;
+}
+#popular-artists-image-2:hover{
+	box-shadow: 0px 0px 9px 5px rgba(230,196,196,0.2);
+	opacity: 0.8;
+}
+#popular-artists-image-2:hover>.hide{
+	display: block;
+}
+#popular-artists-image-3:hover{
+	box-shadow: 0px 0px 9px 5px rgba(230,196,196,0.2);
+	opacity: 0.8;
+}
+#popular-artists-image-3:hover>.hide{
+	display: block;
+}
+#popular-artists-image-4:hover{
+	box-shadow: 0px 0px 9px 5px rgba(230,196,196,0.2);
+	opacity: 0.8;
+}
+#popular-artists-image-4:hover>.hide{
+	display: block;
+}
+#popular-artists-image-5:hover{
+	box-shadow: 0px 0px 9px 5px rgba(230,196,196,0.2);
+	opacity: 0.8;
+}
+#popular-artists-image-5:hover>.hide{
+	display: block;
+}
+#popular-artists-image-6:hover{
+	box-shadow: 0px 0px 9px 5px rgba(230,196,196,0.2);
+	opacity: 0.8;
+}
+#popular-artists-image-6:hover>.hide{
+	display: block;
+}
+/*End of popular artists section*/
+/*Begining of playlist section*/
+#playlist{
+	width:auto;
+	height:auto;
+	background-color:var(--bg_color_2);
+	margin-top: 10%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	text-align: center;
+	align-self: center;
+	padding: 10px;
+	border-radius: 5px;
+}
+#playlist-item-0{
+	background-image: url(https://thumbs.dreamstime.com/b/creative-vector-em…n-record-studio-mobile-app-colorful-114199190.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+#playlist-item-0:hover{
+    box-shadow: 0px 0px 19px 10px rgba(223, 203, 22, 0.747);
+}
+#playlist-item-1{
+	background-image: url(https://image.shutterstock.com/image-vector/romantic-wedding-vector-logo-emblem-260nw-1036678717.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+#playlist-item-1:hover{
+    box-shadow: 0px 0px 19px 10px rgba(223, 203, 22, 0.747);
+}
+#playlist-item-2{
+	background-image: url(https://image.shutterstock.com/z/stock-vector-play…music-logo-icon-vector-illustration-714326719.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    margin-right: 1rem;
+}
+#playlist-item-2:hover{
+	box-shadow: 0px 0px 19px 10px rgba(223, 203, 22, 0.747);}
+
+#playlist-item-3{
+	background-image: url(https://thumbs.dreamstime.com/z/lettering-logo-chi…awn-chill-lettering-sign-invitation-150847756.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    margin-right: 1rem;
+}
+#playlist-item-3:hover{
+	box-shadow: 0px 0px 19px 10px rgba(223, 203, 22, 0.747);
+}
+#playlist-item-4{
+	background-image: url(https://image.shutterstock.com/z/stock-vector-pop-…icon-pop-music-vector-illustration-1012649863.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    margin-right: 1rem;
+}
+#playlist-item-4:hover{
+    box-shadow: 0px 0px 19px 10px rgba(223, 203, 22, 0.747);
+}
+#playlist-item-5{
+	background-image: url(https://www.listenspotify.com/uploaded_files/Thf_1586714139.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    margin-right: 1rem;
+}
+#playlist-item-5:hover{
+	box-shadow: 0px 0px 19px 10px rgba(223, 203, 22, 0.747);
+}
+#playlist-item-6{
+	background-image: url(https://image.freepik.com/free-vector/rock-music-logo_23-2147889169.jpg);
+	background-size: cover;
+	background-position: center;
+	height:120px;
+	width: 120px;
+	border:0px;
+	border-radius: 50%;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+}
+#playlist-item-6:hover{
+	box-shadow: 0px 0px 19px 10px rgba(223, 203, 22, 0.747);
+}
+/*End of playlist section*/
+/*Genre Section*/
+#genre{
+	padding-top: 100px;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	overflow: hidden;
+	margin-bottom: -5%;
+}
+#genre-item{
+	height: auto;
+	width: auto;
+	margin-top: -5%;
+	padding: 0px;
+	transition: transform 0.7s ease-in-out;
+}
+#genre-item-background-1{
+	height: 200px;
+	width: 300px;
+	background-image: url(https://i.ytimg.com/vi/D1B3p7PtdZA/maxresdefault.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity: 01;
+	padding: 0px;
+	color: var(--font_color_2);
+	font-family: sans-serif;
+	font-size: 1.5rem;
+	line-height: 8rem;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 2rem;
+}
+#genre-item:hover{
+	transform: scale(0.9);
+}
+#genre-item-background-2{
+	height: 200px;
+	width: 300px;
+	background-image: url(https://uproxx.com/wp-content/uploads/2018/04/electronic-grid-uproxx-2.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 0px;
+	margin-left: -10px;
+	color: var(--font_color_2);
+	font-family: sans-serif;
+	font-size: 1.5rem;
+	line-height: 8rem;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 2rem;
+}
+#genre-item-background-3{
+	height: 200px;
+	width: 300px;
+	background-image: url(https://zinginstruments.com/wp-content/uploads/couple-driving-car-at-sunset.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 0px;
+	margin-left: -20px;
+	color: var(--font_color_2);
+	font-family: sans-serif;
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+	line-height: 8rem;
+	margin-bottom: 2rem;
+}
+#genre-item-text{
+	color: white;
+	text-align: center;
+	font-family: sans-serif;
+	padding: 2%;
+	font-size: 1.3rem;
+	padding-top: 30px;
+	opacity: 1;
+	font-weight: 600;
+}
+/*End of genre section*/
+/*Latest Songs section*/
+#latest-songs h1{
+	font-family: sans-serif;
+	color: var(--font_color_1);
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin-left: 15px;
+	margin-top: 6vh;
+	margin-left: -5px;
+	margin-bottom: -14px;
+}
+#latest-songs-list{
+	height:auto;
+	width:100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+#latest-songs-item{
+   height:150px;
+   width: auto;
+   margin-top: 2rem;
+   margin-bottom: 1rem;
+}
+#latest-songs-item-img-1{
+    background-image: url(https://upload.wikimedia.org/wikipedia/en/0/00/I_Will_Wait_single_cover.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.5rem;
+}
+#latest-songs-item-img-1:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-1:hover>.hide{
+	display: block;  /*Play button displayed on hover*/
+}
+#latest-songs-item-img-2{
+    background-image: url(https://m.media-amazon.com/images/I/31Ci7OM9LTL.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.5rem;
+}
+
+#latest-songs-item-img-2:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-2:hover>.hide{
+	display: block;
+}
+#latest-songs-item-img-3{
+    background-image: url(https://images.genius.com/4c3ac1f1d845d251671a892309b5f9b5.1000x1000x1.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.5rem;
+}
+
+#latest-songs-item-img-3:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-3:hover>.hide{
+	display: block;
+}
+#latest-songs-item-img-4{
+    background-image: url(https://images.genius.com/0f5d673e38bc5b355b56b40904914596.1000x1000x1.png);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.5rem;
+}
+
+#latest-songs-item-img-4:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-4:hover>.hide{
+	display: block;
+}
+#latest-songs-item-img-5{
+    background-image: url(https://i1.sndcdn.com/avatars-SxyaDLEJbJwgiIbM-BXEYlQ-t240x240.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.5rem;
+}
+
+#latest-songs-item-img-5:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-5:hover>.hide{
+	display: block;
+}
+#latest-songs-item-img-6{
+    background-image: url(https://pagalfree.com/images/128Aashiqui%20Aa%20Gayi%20-%20Radhe%20Shyam%20128%20Kbps.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.3rem;
+}
+
+#latest-songs-item-img-6:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-6:hover>.hide{
+	display: block;
+}
+#latest-songs-item-img-7{
+    background-image: url(https://pagaliworld.com/siteuploads/thumb/sft8/3713_4.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.3rem;
+}
+
+#latest-songs-item-img-7:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-7:hover>.hide{
+	display: block;
+}
+#latest-songs-item-img-8{
+    background-image: url(https://www.easterneye.biz/wp-content/uploads/2021/11/Kusu-Kusu.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.3rem;
+}
+
+#latest-songs-item-img-8:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-8:hover>.hide{
+	display: block;
+}
+#latest-songs-item-img-9{
+    background-image: url(https://i1.sndcdn.com/artworks-o1Og8c6VFEsycxZ0-Q0BVXA-t500x500.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.3rem;
+}
+
+#latest-songs-item-img-9:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-9:hover>.hide{
+	display: block;
+}
+#latest-songs-item-img-10{
+    background-image: url(https://c.ndtvimg.com/2021-05/s2kh1ur8_hina_625x300_29_May_21.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 130px;
+    width: 130px;
+    text-align: center;
+    color: var(--font_color_1);
+    font-size: 1.3rem;
+}
+
+#latest-songs-item-img-10:hover{
+	opacity: 0.8;
+}
+#latest-songs-item-img-10:hover>.hide{
+	display: block;
+}
+#latest-songs-item-button{
+	margin-top: 0%;
+	position: relative;
+	top:37%;
+}
+#latest-songs-item-title{
+	font-family: sans-serif;
+	color: var(--font_color_1);
+	text-align: left;
+	padding: 5px;
+}
+#play{
+	margin-top: 0%;
+}
+/*End of latest songs section*/
+/*End of main*/
+
+/*Aside*/
+#aside-header{
+	height: auto;
+	width: 88%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+    margin-bottom: 2vh;
+}
+#aside-title{
+	height: auto;
+	width: auto;
+	font-size: 2rem;
+	font-family: sans-serif;
+	color: var(--font_color_1);
+	font-weight: bold;
+	display: inline-flex;
+}
+#aside-dropdown{
+	margin-top: 1vh;
+	display: inline-flex;
+}
+#aside-dropdown select{
+	font-size: 1.3rem;
+	font-family: sans-serif;
+	color: var(--font_color_3);
+	font-weight: bold;
+	background-color: var(--bg_color_1);
+	border: 0px;
+}
+#aside-dropdown option{
+	font-size: 1.3rem;
+	font-family: sans-serif;
+	color: black;
+	background-color: var(--font_color_1);;
+	border :0px;
+}
+#aside-dropdown select:focus{
+	outline:none;
+}
+#queue-item{
+	height: 100px;
+	width: 320px;
+	background-color: rgb(1, 72, 130,0.5);
+	display: flex;
+	flex-flow:column wrap;
+	margin-top: 1vh;
+	border-radius:5px;
+}
+#queue-item-img{
+	height: 80px;
+	width: 80px;
+	padding: 1%;
+	margin-top: 1.5vh;
+	margin-left: 1vw;
+	background-image: url(https://i.ytimg.com/vi/tdvuRN1Crfw/maxresdefault.jpg);
+	background-position: center;
+	background-size: cover;
+	color: var(--font_color_1);
+	text-align: center;
+	font-size: 1.3rem;
+	border-radius: 3px;
+}
+#queue-item-title{
+	font-family: sans-serif;
+	color: var(--font_color_1);
+	font-size: 0.8rem;
+	position: relative;
+	top:5vh;
+}
+#queue-favourite{
+	margin-left: 180px;
+	margin-top: -50px;
+	 color: var(--font_color_1);
+	font-size: 1.2rem;
+}
+/*End of aside section*/
+
+/*Music Bar*/
+#music-bar{
+	height: 100px;
+	width: 1500px;
+	position: fixed;
+	bottom: 0;
+	background-color: var(--bg_music_bar);
+	opacity: 1;
+	color: var(--font_color_1);
+	z-index: 15;
+}
+
+#music-icon{
+	height: 70px;
+	width: 70px;
+	margin-left: 2vw;
+	margin-top: 6px;
+	border:2px solid  var(--font_color_1);;
+	opacity: 1;
+}
+#music-icon img{
+	height: 70px;
+	width: 70px;
+	margin-left: 0;
+	margin-top: 0;
+	position: fixed;
+}
+#music-bar:target{
+	display: block; /*When play button is clicked music bar is displayed*/
+}
+#music-icon a{
+	position: fixed;
+	top:12vh;
+	left:98%;
+	color: var(--font_color_1);
+}
+#music-title{
+	color: var(--font_color_1);
+	font-family: sans-serif;
+	font-size:1rem;
+	margin-top: -3.5%;
+	margin-left: 7.5%;
+}
+#music-player-title-artist{
+	 color:lightgrey; 
+	 font-size:0.8rem;
+}
+#play-buttons{
+	margin-top: -2%;
+    margin-left: 34%;
+    font-size: 1.3rem;
+}
+#play-buttons i{
+	padding-right: 4%;
+}
+#progress-bar{
+	height:3px;
+	width:380px;
+	background-color: var(--font_color_3);
+	margin-left: 460px;
+	margin-top:-1vh;
+	border-radius: 2px;
+}
+#circle{
+	position: relative;
+	top:-6px;
+	left:-1px;
+}
+#favourite{
+	margin-left: 5px;
+	display: inline;
+}
+#remove{
+	margin-left: 5px;
+   display: inline;
+}
+#queue{
+	display: inline;
+	margin-left: 67%;
+	position: relative;
+	bottom: 21%;
+}
+#volume{
+	display: inline;
+	margin-left: 70%;
+	position: relative;
+	bottom: 38%;
+}
+#progress-bar-volume{
+	height:3px;
+	width:10vw;
+	background-color: var(--font_color_3);
+	position: fixed;
+	left: 1100px;
+	top:93.5vh;
+	border-radius: 2px;
+	display: inline;
+}
+
+#circle-volume{
+	position: relative;
+	top:-6px;
+	left:0%;
+}
+#start-time{
+	display: inline;
+	position: absolute;
+	 color: var(--font_color_2);
+	font-family: sans-serif;
+	position: relative;
+	left:28%;
+	top:2.5%;
+	font-size: 0.8rem;
+}
+#end-time{
+	display: inline;
+	position: absolute;
+	 color: var(--font_color_2);
+	font-family: sans-serif;
+	font-size: 0.8rem;
+	position: relative;
+	left:55%;
+	top:2.5%;
+}
+/*End of music bar*/
+/*End of CSS for the first web page*/
+
+/*This CSS is used for the Single Playlist Screen html page common properties such as
+main, aside etc. are same as before*/
+/*Artist Template Begining*/
+#artist-template{
+	height: auto;
+	width: 95%;
+	background-color: var(--bg_color_2);
+	margin-top: 5%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+#artist-image{
+	height: 60vh;
+	width: 40%;
+	background: linear-gradient(to bottom, rgba(13,0,101,0) 10%,
+              rgba(13,0,101,1)), url(Images/artist-6.jpg); /*Adding linear gradient*/
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#artist-details{
+	height: 60vh;
+	width: 54%;
+	display: flex;
+	flex-direction: column;
+	margin-right: 3%;
+	margin-left: 1%;
+}
+
+#artist-title{
+	height: 20%;
+	width: 100%;
+	margin-top: 13%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_1);
+}
+
+#artist-title b{
+	font-size: 1.5rem;
+}
+#artist-title followers{
+	font-size: 0.9rem;
+	color: var(--font_color_2);
+	margin-top: 1.5%;
+}
+
+#artist-title artist-type{
+	font-size: 0.9rem;
+	color: var(--font_color_2);
+	font-weight: bold;
+	margin-top: 1rem;
+	padding: 0.5rem;
+}
+
+#artist-intro{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_2);
+	font-size: 0.9rem;
+	text-align: justify;
+	width: 94%;
+}
+
+#artist-buttons{
+	height: auto;
+	width: 55%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 10%;
+}
+
+#playall-button{
+	height: 1.7rem;
+	width: 9rem;
+	background-image: linear-gradient(to left, #8A2387, #E94057, #F27121);
+	color: white;
+    text-align: center;
+    font-weight: bold;
+    font-family: helvetia, sans-serif;
+    border-radius: 0.3rem;
+    padding-top: 4%;
+}
+#follow-button{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_1);
+}
+/*Artist Template End*/
+/*Artist Songs Begining*/
+#artist-songs{
+	height: auto;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding-top: 3%;
+}
+#tracks{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_1);
+	font-size: 0.8rem;
+	margin-top: 0.5rem;
+}
+#song{
+	height: 12vh;
+	width: 95%;
+	min-width: 300px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--bg_color_3);
+	margin-bottom: 2%;
+}
+#song img{
+	height: 10vh;
+	width: 10vh;
+	margin-left: 2vw;
+}
+
+#song-number{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_2);
+    margin-left: 1vw;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 50%;
+}
+
+#icons{
+	height: auto;
+	width: 4vw;
+	color: var(--font_color_2);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	justify-content: space-between;
+	padding-right: 2%;
+}
+
+#song-details{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_1);
+	font-weight: bold;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin-left: 2vw;
+	font-size: 0.95rem;
+}
+#song-details author{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_2);
+	font-size: 0.8rem;
+	margin-top: 1vh;
+}
+
+#aside-header-1{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_1);
+	font-size: 1.6rem;
+	font-weight: bolder;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	margin-right: 5vw;
+	width: 90%;
+}
+
+#aside-header-1 x{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_2);
+	font-size: 0.9rem;
+}
+
+#similar-artist{
+	height: 20vh;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	margin-top: 1.5rem;
+	color: var(--font_color_1);
+	font-size: 1.3rem;
+	margin-bottom: -1.5rem;
+}
+
+#artist-img{
+   background-image: url(https://images.news18.com/ibnlive/uploads/2021/09/mouni-jubin-1.jpg);
+   height: 15vh;
+   width: 15vh;
+   background-position: center;
+   background-size: cover;
+   margin-right: -0.5rem;
+}
+
+#similar-artist i{
+	margin-left: 8vw;
+}
+
+#aside-header-2{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_1);
+	font-size: 1.6rem;
+	font-weight: bolder;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	margin-right: 5vw;
+	width: 90%;
+	margin-top: 2.5rem;
+}
+
+#aside-header-2 x{
+	font-family: helvetica, sans-serif;
+	color: var(--font_color_2);
+	font-size: 0.9rem;
+}
+
+aside #song{
+	align-items: center;
+	margin-top: 1.5rem;
+	margin-bottom: -1rem;
+	background-color: var(--bg_color_1);
+}
+
+aside #song #song-details{
+	font-size: 0.8rem;
+}
+
+aside #song #song-number{
+	width: 70%;
+	margin-top: 0.3rem;
+}
+/*Artist Songs End*/
+/*End of the basic CSS for both the web pages*/
+
+/*Responsiveness*/
+
+
+        /* 1. first part of the footer */
+		.active-song-description {
+			/* border:1px solid white; */
+			height: 90%;
+			width: 25%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+		}
+		/* the current song which is being played, this is the image container for that. */
+		#song-image {
+			width: 70px;
+			height: 70px;
+			min-width: 50px;
+			min-height: 50px;
+		}
+		/* current song image */
+		#song-image img {
+			width: 100%;
+			height: 100%;
+		
+		}
+		/* heart and ban icon */
+		.heart-and-ban-icon {
+			height: 100%;
+			padding-top: 4%;
+			color:honeydew;
+		}
+		/* song decscription */
+		.song-desc {
+			margin-right: 1%;
+			margin-left: 1%;
+			
+		}
+		/* song name */
+		.song-desc div:nth-child(1) {
+			font-size: 20px;
+			color:honeydew;
+		}
+		/* song author */
+		.song-desc div:nth-child(2) {
+			font-size: 18px;
+			color:honeydew;
+		}
+		
+		/* 2. Second part of the footer*/
+		.player {
+			width: 45%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: nowrap;
+			color:honeydew;
+		}
+		/* controls is the container for all the center controls of the player */
+		.controls {
+			width: 40%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 30px;
+			color:honeydew;
+		}
+		/* this is the song-duration slider */
+		#slider {
+			width: 100%;
+			font-size: 12px;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: nowrap;
+			align-items: center;
+			justify-content: center;
+			margin-top: 5px;
+			color:honeydew;
+		}
+		/* ////////// */
+		.time {
+			margin: 0px 10px;
+		}
+		
+		/* adjusting the slider for better visuals */
+		.slidecontainer {
+			width: 100%;
+		}
+		/* for audio and main center player */
+		.slider {
+			-webkit-appearance: none;
+			width: 100%;
+			height: 5px;
+			background: #189cad;
+			outline: none;
+			opacity: 0.5;
+			-webkit-transition: 0.2s;
+			transition: opacity 0.2s;
+		}
+		/* hover effect for the slider */
+		.slider:hover {
+			opacity: 1;
+		}
+		/* these are for adjusting the dimensions and default styling of the long-slider */
+		.slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 17px;
+			height: 17px;
+			border-radius: 50%;
+			background: #0daa6e;
+			cursor: pointer;
+			color:honeydew;
+		}
+		/* this is the circular thumb, which can be moved across the div */
+		.slider::-moz-range-thumb {
+			width: 25px;
+			height: 25px;
+			background: #1440b8;
+			cursor: pointer;
+			color:honeydew;
+		}
+		
+		/* third part of the footer */
+		/* this contains the extra icons and slider for volume */
+		/* this is also a container */
+		.extras {
+			width: 20%;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+		}
+		footer {
+			position: relative;
+			bottom: 2px;
+			width: 100%;
+			height: 100px;
+			background-color: #3f3434;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-content: center;
+			flex-wrap: nowrap;
+			padding: 0px 3%;
+			box-sizing: border-box;
+			z-index: 6;
+		}
+/*End of responsiveness*/
+</style>
+	 <title>Music Player</title>
+	 <!--Linking the CSS stylesheet using extrenal CSS-->
+	 <link rel="stylesheet" type="text/css" href="My music css.css">
+	 <!--Font Awesome script for using icons from font awesome-->
+	 <script src="https://kit.fontawesome.com/6f0f83005a.js" crossorigin="anonymous"></script>
+	 <!--Adds responsiveness to the website-->
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
+</head>
+<!--End of head section-->
+
+<!--Begining of the body section-->
+<body>
+	<!--Begining of navigation bar section-->
+	<nav>
+		<!--Music Player Logo div-->
+		<div id="music-player-tag">
+		 <div id="music-player-logo">
+			 <img src="https://i.pinimg.com/originals/82/c6/5b/82c65b9bb0a75026fc4c82a438b4cc9b.jpg">
+		 </div>
+		 <!--Music Player Logo div end-->
+
+		 <!--Music Player Title-->
+		 <div id="music-player-name">
+             MRINAL<br/><b>MUSIC</b>
+		 </div>
+		</div>
+		 <!--Music Player Title div end-->
+
+         <!--Search Bar div-->
+		 <div class="favs">
+            <h4>
+                Favourites
+            </h4>
+        </div>
+         <div id="search-bar-utility">
+		 <div id="search-bar">
+			 <form>
+				 <input type="text" placeholder="Search...">
+				 <!--Search Icon-->
+				 <i class="fas fa-search"></i>
+			 </form>
+		 </div>
+		 <!--Search Bar div end-->
+
+         <!--Notification Bell div-->
+		 <div id="notifications">
+			<img src="https://cdn.iconscout.com/icon/free/png-256/notification-1765818-1505607.png">
+		 </div>
+		 <!--Notification Bell div end-->
+
+         <!--User Image div-->
+		 <div id="user">
+			 <img src="https://cdn.dribbble.com/users/484106/screenshots/6913418/s2dr2_4x.jpg">
+		 </div>
+		</div>
+		 <!--User Image div end-->
+	</nav>
+    <!--End of navigation bar section-->
+
+    <!--Main body of the Music Player Home Page-->
+	<main>
+		<!--Home Screen Carousel which is slideshown with class slideshow-->
+		<div id="new-releases">
+			 <img src="https://i.ytimg.com/vi/DZQFy2LN9Ew/maxresdefault.jpg">
+			 <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/E645/production/_113294985_composite.jpg">
+			 <img src="https://i.ytimg.com/vi/Ywl5yrqKq04/maxresdefault.jpg">
+		</div>
+		<!--End of home screen carousel-->
+        
+        <!--Begining of latest release section-->
+		<div id="latest-release">
+			<!--Heading-->
+			<h1>Latest Release</h1>
+            <!--Latest Release Item div which contains the latest songs displayed-->
+			<div id="latest-release-items">
+				<!--Item 1-->
+                <div id="latest-release-item">
+                	<!--Song Image-->
+                	<div id="latest-release-img">
+                		<!--Play Button div which is hidden and appears on hover-->
+                		<div id="latest-release-img-button" class="hide">
+                		     <a href="#music-bar" class="font-color"><i class="fas fa-play"></i></a>
+                	    </div>
+                	    <!--End of Play Button Div-->
+                	 </div>
+                	 <!--End of Song Image-->
+                     <!--Div containing song details-->
+                	 <div id="latest-item-title" class="hide">
+                	     <b>willow</b>
+                	     <p style="color:lightgrey">December, 2020 &emsp;&emsp; 3:34</p>
+                     </div>
+                     <!--End of div containing song details-->
+                     <!--Dropdown menu icon-->
+                     <div id="dropdown">
+                        <i class="fas fa-chevron-circle-down">
+                     	<div id="dropdown-menu" class="hide">
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-play"></i>
+                     			&nbsp;
+                     		    <a href="#music-bar">Play Now</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-plus"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Add to Queue</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-plus"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Add to Favourites</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-exclamation-circle"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Get Info</a>
+                     	    </div>
+                     	</div>
+                        </i>
+                     </div>
+                     <!--End of dropdown menu-->
+                </div>
+                <!--End of Item 1-->
+                <!--Item 2-->
+                <div id="latest-release-item">
+                	<!--Song Image-->
+                	<div id="latest-release-img">
+                		<!--Play Button div which is hidden and appears on hover-->
+                		<div id="latest-release-img-button" class="hide">
+                		     <a href="#music-bar" class="font-color"><i class="fas fa-play"></i></a>
+                	    </div>
+                	 <!--End of Play Button Div-->
+                     </div>
+                     <!--End of Song Image-->
+                     <!--Div containing song details-->
+                	 <div id="latest-item-title">
+                	     <b>evermore (feat. Bon Iver)</b>
+                	     <p style="color:lightgrey">December, 2020 &emsp;&emsp; 5:04</p>
+                     </div>
+                     <!--End of div containing song details-->
+                     <!--Dropdown menu icon-->
+                	    <div id="dropdown">
+                        <i class="fas fa-chevron-circle-down">
+                     	<div id="dropdown-menu" class="hide">
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-play"></i>
+                     			&nbsp;
+                     		    <a href="#music-bar">Play Now</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-plus"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Add to Queue</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-plus"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Add to Favourites</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-exclamation-circle"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Get Info</a>
+                     	    </div>
+                     	</div>
+                        </i>
+                     </div>
+                     <!--End of dropdown menu-->
+                </div>
+                <!--End of Item 2-->
+                <!--Item 3-->
+                <div id="latest-release-item">
+                	 <!--Song Image-->
+                     <div id="latest-release-img">
+                		<!--Play Button div which is hidden and appears on hover-->
+                		<div id="latest-release-img-button" class="hide">
+                		     <a href="#music-bar" class="font-color"><i class="fas fa-play"></i></a>
+                	    </div>
+                	 <!--End of Play Button Div-->
+                     </div>
+                     <!--End of Song Image-->
+                     <!--Div containing song details-->
+                	 <div id="latest-item-title">
+                	     <b>ivy</b>
+                	     <p style="color:lightgrey">December, 2020 &emsp;&emsp; 4:20</p>
+                     </div>
+                     <!--End of div containing song details-->
+                     <!--Dropdown menu icon-->
+                	    <div id="dropdown">
+                        <i class="fas fa-chevron-circle-down">
+                     	<div id="dropdown-menu" class="hide">
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-play"></i>
+                     			&nbsp;
+                     		    <a href="#music-bar">Play Now</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-plus"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Add to Queue</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-plus"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Add to Favourites</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-exclamation-circle"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Get Info</a>
+                     	    </div>
+                     	</div>
+                        </i>
+                     </div>
+                      <!--End of dropdown menu-->
+                </div>
+                <!--End of Item 3-->
+                <!--Item 4-->
+                 <div id="latest-release-item">
+                 	 <!--Song Image-->
+                	 <div id="latest-release-img">
+                	 	 <!--Play Button div which is hidden and appears on hover-->
+                		 <div id="latest-release-img-button" class="hide">
+                		         <a href="#music-bar" class="font-color"><i class="fas fa-play"></i></a>
+                	     </div>
+                	     <!--End of Play Button Div-->
+                     </div>
+                     <!--End of Song Image-->
+                     <!--Div containing song details-->
+                	 <div id="latest-item-title">
+                	     <b>happiness</b>
+                	     <p style="color:lightgrey">December, 2020 &emsp;&emsp; 5:15</p>
+                     </div>
+                     <!--End of div containing song details-->
+                     <!--Dropdown menu icon-->
+                	                     <div id="dropdown">
+                        <i class="fas fa-chevron-circle-down">
+                     	<div id="dropdown-menu" class="hide">
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-play"></i>
+                     			&nbsp;
+                     		    <a href="#music-bar">Play Now</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-plus"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Add to Queue</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-plus"></i>
+                     			&nbsp;
+                     		    <a hrf="#latest-release">Add to Favourites</a>
+                     	    </div>
+                     		<hr/>
+                     		<div id="dropdown-list">
+                     			<i class="fas fa-exclamation-circle"></i>
+                     			&nbsp;
+                     		    <a href="#latest-release">Get Info</a>
+                     	    </div>
+                     	</div>
+                        </i>
+                     </div>
+                      <!--End of dropdown menu-->
+                 </div>
+                <!--End of Item 4-->
+			</div>
+			<!--End of latest release item div-->
+		</div>
+		<!--End of latest release section-->
+
+		<!--Begining of Popular Artists section-->
+		<div id="popular-artists">
+			 <!--Popular Artist Section Title-->
+			 <h1>Popular Artists</h1>
+			 <!--Begining of the popular artist list section-->
+			 <div id="popular-artist-list">
+			 	 <!--Artist 1-->
+			     <div id="popular-artists-image">
+				     <div id="popular-artists-text" class="hide">
+				     	<a href="MusicPlayerSinglePlaylistScreen.html">
+			               Sherya Ghosal
+			            </a>
+			         </div>
+			     </div>
+			     <!--End of Artist 1-->
+                 <!--Artist 2-->
+			     <div id="popular-artists-image-2">
+				     <div id="popular-artists-text" class="hide">
+				     	<a href="MusicPlayerSinglePlaylistScreen.html">
+			                Arijit Singh
+			            </a>
+			         </div>
+			     </div>
+			     <!--End of Artist 2-->
+			     <!--Artist 3-->
+			     <div id="popular-artists-image-3">
+				      <div id="popular-artists-text" class="hide">
+				     	<a href="MusicPlayerSinglePlaylistScreen.html">
+			                Arman Malik
+			            </a>
+			         </div>
+			     </div>
+			     <!--End of Artist 3-->
+			     <!--Artist 4-->
+			     <div id="popular-artists-image-4">
+				    <div id="popular-artists-text" class="hide">
+				     	<a href="MusicPlayerSinglePlaylistScreen.html">
+							Darshan Raval
+			            </a>
+			         </div>
+			     </div>
+			     <!--End of Artist 4-->
+			     <!--Artist 5-->
+			     <div id="popular-artists-image-5">
+				    <div id="popular-artists-text" class="hide">
+				     	<a href="MusicPlayerSinglePlaylistScreen.html">
+							Palak Muchhal
+			            </a>
+			         </div>
+			     </div>
+			     <!--End of Artist 5-->
+			     <!--Begining of Artist 6-->
+			     <div id="popular-artists-image-6">
+				   <div id="popular-artists-text" class="hide">
+				     	<a href="MusicPlayerSinglePlaylistScreen.html">
+							Jubin Nautiyal
+			            </a>
+			         </div>
+			     </div>
+			     <!--End of Artist 6-->
+		    </div>
+		    <!--End of popular artists list div-->
+	    </div>
+        <!--End of popluar artist section-->
+
+       <!--Begining of playlist section-->
+   
+        <div id="playlist">
+            <div id="playlist-item-0">
+        		<div id="popular-artists-text">
+			         Station
+			    </div>
+        	</div>
+            <!--Playlist item 1-->
+        	<div id="playlist-item-1">
+        		<div id="popular-artists-text">
+			         Love
+			    </div>
+        	</div>
+        	<!--End of playlist item 1-->
+        	<!--Playlist item 2-->
+        	<div id="playlist-item-2">
+        		<div id="popular-artists-text">
+			         Retro
+			    </div>
+        	</div>
+        	<!--End of playlist item 2-->
+        	<!--Playlist item 3-->
+        	<div id="playlist-item-3">
+        		<div id="popular-artists-text">
+			         Chill
+			    </div>
+        	</div>
+        	<!--End of playlist item 3-->
+        	<!--Playlist item 4-->
+        	<div id="playlist-item-4">
+        		<div id="popular-artists-text">
+			         Pop
+			    </div>
+        	</div>
+        	<!--End of playlist item 4-->
+        	<!--Playlist item 5-->
+        	<div id="playlist-item-5">
+        		<div id="popular-artists-text">
+			         Workout
+			    </div>
+        	</div>
+        	<!--End of playlist item 5-->
+        	<!--Playlist item 6-->
+        	<div id="playlist-item-6">
+        		<div id="popular-artists-text">
+			         Rock
+			    </div>
+        	</div>
+        	<!--End of playlist item 6-->
+        </div>
+        <!--End of playlist section-->
+
+        <!--Begining of genre section-->
+	    <div id="genre">
+	    	<!--Genre Item 1-->
+	    	<div id="genre-item">
+	    		 <div id="genre-item-background-1">Party</div>
+	    	</div>
+	    	<!--End of genre item 1-->
+	    	<!--genre item 2-->
+	    	<div id="genre-item">
+	    		 <div id="genre-item-background-2">Electronic</div>
+	    	</div>
+	    	<!--End of genre item 2-->
+	    	<!--Genre Item 3-->
+	    	<div id="genre-item">
+	    		 <div id="genre-item-background-3">Road Trip</div>	    	
+	    	</div>
+	    	<!--End of genre item 3-->
+	    </div>
+	    <!--End of genre section-->
+
+	    <!--Begining of latest english songs section-->
+	    <div id="latest-songs">
+	    	<!--Latest English Songs title-->
+	    	<h1>Latest English</h1>
+	    	<!--Songs List Div-->
+	    	<div id="latest-songs-list">
+	    		<!--Song 1-->
+	    		<div id="latest-songs-item">
+	    			<!--Song Image-->
+	    			 <div id="latest-songs-item-img-1">
+                     <!--Play button which is hidden and appears on hover-->
+	    			 <div id="latest-songs-item-button" class="hide">
+                		 <i class="fas fa-play"></i>
+                	 </div>
+                	 <!--End of play button-->
+	    			</div>
+	    			<!--End of song image-->
+	    			<!--Song title-->
+	    			<div id="latest-songs-item-title">
+	    				<b>I'll Wait</b><br/><date style="color:lightgrey">January, 2021</date>
+	    			</div>
+	    			<!--End of song title-->
+	    		</div>
+	    		<!--End of song 1-->
+	    		<!--Song 2-->
+	    		<div id="latest-songs-item">
+	    			<!--Song Image-->
+	    			 <div id="latest-songs-item-img-2">
+	    				 <!--Play button which is hidden and appears on hover-->
+              		     <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	     </div>
+                	     <!--End of play button-->
+	    			 </div>
+	    			 <!--End of song image-->
+	    			 <!--Song title-->
+	    			 <div id="latest-songs-item-title">
+	    				 <b>Just look up</b><br/><date style="color:lightgrey">November, 2020</date>
+	    			</div>
+	    			<!--End of song title-->
+	    		</div>
+	    		<!--End of song 2-->
+	    		<!--Song 3-->
+	    		<div id="latest-songs-item">
+	    			 <!--Song Image-->
+	    			 <div id="latest-songs-item-img-3">  
+	    			 <!--Play button which is hidden and appears on hover-->         	
+	    				 <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	     </div>
+                	     <!--End of play button-->
+	    			</div>
+	    			<!--End of song image-->
+	    			<!--Song title-->
+	    			<div id="latest-songs-item-title">
+	    				 <b>I drink wine</b><br/><date style="color:lightgrey">December, 2020</date>
+	    			</div>
+	    			<!--End of song title-->
+	    		</div>
+	    		<!--End of song 3-->
+	    		<!--Song 4-->
+	    		<div id="latest-songs-item">
+	    			 <!--Song Image-->
+	    			 <div id="latest-songs-item-img-4">
+	    			 	<!--Play button which is hidden and appears on hover-->
+	    				 <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	     </div>
+                	     <!--End of play button-->
+	    			</div>
+	    			<!--End of song image-->
+	    			<!--Song title-->
+	    			<div id="latest-songs-item-title">
+	    				<b>On my way</b><br/><date style="color:lightgrey">January, 2021</date>
+	    			</div>
+	    			<!--End of song title-->
+	    		</div>
+	    		<!--End of song 4-->
+	    		<!--Song 4-->
+	    		<div id="latest-songs-item">
+	    			<!--Song Image-->
+	    			<div id="latest-songs-item-img-5">
+	    				<!--Play button which is hidden and appears on hover-->
+	    		         <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	     </div>
+                	     <!--End of play button-->
+	    			</div>
+	    			<!--End of song image-->
+	    			<!--Song title-->
+	    			<div id="latest-songs-item-title">
+	    				<b>One right now</b><br/><date style="color:lightgrey">January, 2021</date>
+	    			</div>
+	    			<!--End of song title-->
+	    		</div>
+	    		<!--End of song 5-->
+	       </div>
+	       <!--End of songs list div-->
+	    </div>
+	    <!--End of latest english songs section-->
+
+	    <!--Begining of latest hindi songs section-->
+	    <div id="latest-songs">
+	    	<!--Latest Hindi Songs title-->
+	    	<h1>Latest Hindi</h1>
+	    	<!--Latest songs list div-->
+	    	<div id="latest-songs-list">
+	    		<!--Song 1-->
+	    		 <div id="latest-songs-item">
+	    		 	<!--Song image-->
+	    			 <div id="latest-songs-item-img-6">
+	    			 	<!--Play button which is hidden and appears on hover-->
+	    				  <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	      </div>
+                	      <!--End of play button-->
+	    		      </div>
+	    		      <!--End of song image-->
+	    		      <!--Song title-->
+	    			   <div id="latest-songs-item-title">
+	    				     <b>Aashiqui aa gayi</b><br/><date style="color:lightgrey">November, 2020</date>
+	    			   </div>
+	    			   <!--End of song title-->
+	    		</div>
+	    		<!--End of song 1-->
+	    		<!--Song 2-->
+	    		<div id="latest-songs-item">
+	    			 <!--Song image-->
+	    			 <div id="latest-songs-item-img-7">
+	    			 	<!--Play button which is hidden and appears on hover-->
+	    				 <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	     </div>
+                	     <!--End of play button-->
+	    			 </div>
+	    			 <!--End of song image-->
+	    			 <!--Song title-->
+	    			<div id="latest-songs-item-title">
+	    				 <b>Tumsa vi zayda</b><br/><date style="color:lightgrey">July, 2020</date>
+	    			</div>
+	    			<!--End of song title-->
+	    		</div>
+	    		<!--End of song 2-->
+	    		<!--Song 3-->
+	    		<div id="latest-songs-item">
+	    			 <!--Song image-->
+	    			 <div id="latest-songs-item-img-8">
+	    				<!--Play button which is hidden and appears on hover-->
+	    				 <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	     </div>
+                	    <!--End of play button-->
+                	 <!--End of song image-->
+	    			</div>
+	    			<!--Song title-->
+	    			<div id="latest-songs-item-title">
+	    				 <b>Kusu Kusu</b><br/><date style="color:lightgrey">November, 2020</date>
+	    			</div>
+	    			<!--End of song title-->
+	    		</div>
+	    		<!--End of song 3-->
+	    		<!--Song 4-->
+	    		<div id="latest-songs-item">
+	    			 <!--Song image-->
+	    			 <div id="latest-songs-item-img-9">
+	    			 	<!--Play button which is hidden and appears on hover-->
+	    				 <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	     </div>
+                	     <!--End of play button-->
+	    			 </div>
+	    			 <!--End of song image-->
+	    			 <!--Song title-->
+	    			<div id="latest-songs-item-title">
+	    				 <b>Meri zindagi ha tu</b><br/><date style="color:lightgrey">January, 2021</date>
+	    			</div>
+	    			<!--End of song title-->
+	    		</div>
+	    		<!--End of song 4-->
+	    		<!--Song 5-->
+	    		<div id="latest-songs-item">
+	    			<!--Song image-->
+	    			 <div id="latest-songs-item-img-10">
+	    			 	<!--Play button which is hidden and appears on hover-->
+	    				 <div id="latest-songs-item-button" class="hide">
+                		     <i class="fas fa-play"></i>
+                	     </div>
+                	     <!--End of play button-->
+           			 </div>
+           			 <!--End of song image-->
+           			  <!--Song title-->
+	    			<div id="latest-songs-item-title">
+	    				 <b>Barrish ban jana</b><br/><date style="color:lightgrey">February, 2021</date>
+	    			</div>
+	    		    <!--End of song title-->
+	    		</div>
+	    		<!--End of song 5-->
+	    	</div>
+	    	<!--End of latest songs list div-->
+	    </div>
+	    <!--End of latest hindi song section-->
+	</main>
+	<!--End of main section-->
+
+	<!--Begining of aside section-->
+    <aside>
+        <!--Aside section header-->
+   	    <div id="aside-header">
+   	     <!--Aside section title-->
+   	      <div id="aside-title">
+   		     Queue
+   	      </div>
+          <!--End of aside section title-->
+          <!--Dropdown menu-->
+       	 <div id="aside-dropdown">
+   		     <form>
+   			     <select>
+   			         <option id="Queue" label="Queue">Queue</option>
+   			         <option id="Playlist" lable="Playlist"><a href="MusicPlayerHomePage2.html">Playlist</a></option>
+   		         </select>
+   	         </form>
+   	     </div>
+         <!--End of dropdown menu-->
+        </div>
+        <!--End of aside section header-->
+        <!--List of Songs-->
+        <!--Song 1-->
+   	     <div id="queue-item">
+   	     	<!--Song Image-->
+   		     <div id="queue-item-img"></div>
+   		         <!--Song title-->
+   		     <div id="queue-item-title">
+                 <b>willow</b>
+                 <p style="color:lightgrey;">Taylor Swift</p>
+             </div>
+             <!--End of song title-->
+             <!--Favourite icon-->
+             <div id="queue-favourite">
+        	     <i class="far fa-heart"></i>
+             </div>
+             <!--End of favourite icon-->
+       	 </div>
+       	 <!--End of song 1-->
+       	 <!--Song 2-->
+   	     <div id="queue-item">
+   	     	<!--Song Image-->
+   		     <div id="queue-item-img"></div>
+   		         <!--Song title-->
+   		     <div id="queue-item-title">
+                 <b>willow</b>
+                 <p style="color:lightgrey;">Taylor Swift</p>
+             </div>
+             <!--End of song title-->
+             <!--Favourite icon-->
+             <div id="queue-favourite">
+        	     <i class="far fa-heart"></i>
+             </div>
+             <!--End of favourite icon-->
+       	 </div>
+       	 <!--End of song 2-->
+       	 <!--Song 3-->
+   	     <div id="queue-item">
+   	     	<!--Song Image-->
+   		     <div id="queue-item-img"></div>
+   		         <!--Song title-->
+   		     <div id="queue-item-title">
+                 <b>willow</b>
+                 <p style="color:lightgrey;">Taylor Swift</p>
+             </div>
+             <!--End of song title-->
+             <!--Favourite icon-->
+             <div id="queue-favourite">
+        	     <i class="far fa-heart"></i>
+             </div>
+             <!--End of favourite icon-->
+       	 </div>
+       	 <!--End of song 3-->
+       	 <!--Song 4-->
+   	     <div id="queue-item">
+   	     	<!--Song Image-->
+   		     <div id="queue-item-img"></div>
+   		         <!--Song title-->
+   		     <div id="queue-item-title">
+                 <b>willow</b>
+                 <p style="color:lightgrey;">Taylor Swift</p>
+             </div>
+             <!--End of song title-->
+             <!--Favourite icon-->
+             <div id="queue-favourite">
+        	     <i class="far fa-heart"></i>
+             </div>
+             <!--End of favourite icon-->
+       	 </div>
+       	 <!--End of song 4-->
+       	 <!--Song 5-->
+   	     <div id="queue-item">
+   	     	<!--Song Image-->
+   		     <div id="queue-item-img"></div>
+   		         <!--Song title-->
+   		     <div id="queue-item-title">
+                 <b>willow</b>
+                 <p style="color:lightgrey;">Taylor Swift</p>
+             </div>
+             <!--End of song title-->
+             <!--Favourite icon-->
+             <div id="queue-favourite">
+        	     <i class="far fa-heart"></i>
+             </div>
+             <!--End of favourite icon-->
+       	 </div>
+       	 <!--End of song 5-->
+       	 <!--Song 6-->
+   	     <div id="queue-item">
+   	     	<!--Song Image-->
+   		     <div id="queue-item-img"></div>
+   		         <!--Song title-->
+   		     <div id="queue-item-title">
+                 <b>willow</b>
+                 <p style="color:lightgrey;">Taylor Swift</p>
+             </div>
+             <!--End of song title-->
+             <!--Favourite icon-->
+             <div id="queue-favourite">
+        	     <i class="far fa-heart"></i>
+             </div>
+             <!--End of favourite icon-->
+       	 </div>
+       	 <!--End of song 6-->
+       	 <!--Song 7-->
+   	     <div id="queue-item">
+   	     	<!--Song Image-->
+   		     <div id="queue-item-img"></div>
+   		         <!--Song title-->
+   		     <div id="queue-item-title">
+                 <b>willow</b>
+                 <p style="color:lightgrey;">Taylor Swift</p>
+             </div>
+             <!--End of song title-->
+             <!--Favourite icon-->
+             <div id="queue-favourite">
+        	     <i class="far fa-heart"></i>
+             </div>
+             <!--End of favourite icon-->
+       	 </div>
+       	 <!--End of song 7-->
+   </aside>
+   <!--End of aside section-->
+
+   <footer>
+    <div class="active-song-description">
+        <!-- song image -->
+        <div id="song-image">
+            <img src="https://pagalsong.in/uploads//thumbnails/300x300/meri_maa_ke_barabar_koi_nahi.jpg">
+        </div>
+        <!-- song name and author -->
+        <div class="song-desc">
+            <div>
+                maa ka barabar koi nhi
+            </div>
+            <div>
+                jubin
+            </div>
+            <!-- heart icon and ban icon -->
+        </div>
+        <div class="heart-and-ban-icon">
+            <span>
+                <i class="far fa-heart"></i>
+            </span>
+            <span>
+                <i class="fas fa-ban"></i>
+            </span>
+        </div>
+    </div>
+    <!-- these are the main player controls -->
+    <div class="player">
+        <div class="controls">
+            <div><i class="fas fa-random"></i></div>
+            <div><i class="fas fa-step-backward"></i></div>
+            <div><i class="fas fa-pause-circle"></i></div>
+            <div><i class="fas fa-step-forward"></i></div>
+            <div><i class="fas fa-redo"></i></div>
+        </div>
+        <!-- this is the slider -->
+        <div id="slider">
+            <!-- current time -->
+            <div class="time">
+                1:39
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+            </div>
+            <!-- total time -->
+            <div class="time">
+                4:44
+            </div>
+        </div>
+    </div>
+    <!-- other icons including the volume slider and all -->
+    <div class="extras">
+        <div>
+            <i class="fas fa-list-ul" style="color:rgb(173, 166, 155);"></i>
+        </div>
+        <div>
+            <i class="fas fa-laptop" style="color:rgb(173, 166, 155);"></i>
+        </div>
+        <div>
+            <i class="fas fa-volume-up" style="color:rgb(173, 166, 155);"></i>
+        </div>
+        <div class="slidecontainer" style="width:30%;">
+            <input type="range" min="0" max="100" value="0" class="slider" id="myRange" style="margin-top:0px;">
+        </div>
+        <div>
+            <i class="fas fa-expand-alt" style="color:rgb(173, 166, 155);"></i>
+        </div>
+    </div>
+</footer>
+   <!--End of footer section-->
+</body>
+<!--End of body section-->
+</html>
+<!--End of html code-->
